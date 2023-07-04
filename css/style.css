@@ -1,0 +1,44 @@
+/* congviec.php */
+.container {
+    padding-top: 10px;
+}
+.rounded {
+    width: 100px;
+}
+.img-thumbnail {
+    width: 80px !important;
+}
+.message {
+    display: none;
+}
+#overlay {
+    background: #ffffff;
+    color: #666666;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    float: left;
+    text-align: center;
+    padding-top: 25%;
+    opacity: 0.8;
+}
+
+/* index.php */
+.button {
+    border: 2px solid black;
+    background-color: dodgerblue;
+    color: blanchedalmond;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.button:hover,
+.button:active {
+    background-color: green;
+}
