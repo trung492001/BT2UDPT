@@ -1,4 +1,3 @@
-<!-- table -->
 <table class="table" id="tasksTable" style="table-layout: auto">
     <thead>
         <tr>
@@ -17,4 +16,3 @@
 
     </tbody>
 </table>
-<!-- table -->

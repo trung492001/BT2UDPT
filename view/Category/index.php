@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="TuanRose">
+    <meta name="author" content="DoTienTrung">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP CRUD Application Using PHP-OOP, PDO-MySQL, jQuery, Ajax, Bootstrap 4</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>BT2UDPT</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -26,10 +25,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../Task/Task.php">Công việc <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../task/index.php">Công việc <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Category/Category.php">Loại công việc</a>
+                    <a class="nav-link" href="../category/index.php">Loại công việc</a>
                 </li>
             </ul>
         </div>
@@ -56,7 +55,7 @@
             </div>
         </div>
         <?php
-        include_once 'categoriestable.php';
+        include_once 'categoriesTable.php';
         ?>
         <nav id="paginationCategory"></nav>
         <input type="hidden" name="currentPageCategory" id="currentPageCategory" value="1">

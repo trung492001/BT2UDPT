@@ -4,7 +4,7 @@ class Database
     private $dbServer = 'localhost';
     private $dbUser = 'root';
     private $dbPassword = '';
-    private $dbName = 'TaskManagementDB';
+    private $dbName = 'taskmanagementdb';
     protected $conn;
 
     public function __construct()

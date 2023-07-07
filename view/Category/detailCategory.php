@@ -1,4 +1,3 @@
-<!-- profile modal start -->
 <div class="modal fade" id="categoryViewModal" tabindex="-1" role="dialog" aria-labelledby="userViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -19,4 +18,3 @@
         </div>
     </div>
 </div>
-<!-- profile modal end -->

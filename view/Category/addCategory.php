@@ -1,10 +1,3 @@
-<!-- add form modal -->
-<html>
-
-<head>
-
-</head>
-
 <body>
     <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -20,9 +13,6 @@
                         <div class="form-group">
                             <label class="col-form-label">Tên loại công việc</label>
                             <div class="input-group mb-3">
-                                <!-- <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                                </div> -->
                                 <input type="text" class="form-control" id="name" name="name" value="test" required="required">
                             </div>
                         </div>
@@ -35,7 +25,3 @@
             </div>
         </div>
     </div>
-    <!-- add form modal end -->
-</body>
-
-</html>

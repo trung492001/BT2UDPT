@@ -1,16 +1,11 @@
 <?php
-require_once '../model/Database.php';
+require_once '../model/database.php';
 
 class Task extends Database
 {
-    // table name
+
     protected $tableName = 'task';
 
-    /**
-     * function is used to add record
-     * @param array $data
-     * @return int $lastInsertedId
-     */
     public function add($data)
     {
         if (!empty($data)) {
@@ -62,13 +57,6 @@ class Task extends Database
         }
     }
 
-    /**
-     * function is used to get records
-     * @param int $stmt
-     * @param int @limit
-     * @return array $results
-     */
-
     public function getRows($start = 0, $limit = 4)
     {
         $sql = "SELECT {$this->tableName}.*, category.name as category_name FROM {$this->tableName} JOIN category ON task.category_id = category.id ORDER BY id DESC LIMIT {$start},{$limit}";
@@ -82,7 +70,6 @@ class Task extends Database
         return $results;
     }
 
-    // delete row using id
     public function deleteRow($id)
     {
         $sql = "DELETE FROM {$this->tableName}  WHERE id=:id";
@@ -106,12 +93,7 @@ class Task extends Database
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['pcount'];
     }
-    /**
-     * function is used to get single record based on the column value
-     * @param string $fileds
-     * @param any $value
-     * @return array $results
-     */
+
     public function getRow($field, $value)
     {
 
@@ -155,7 +137,6 @@ class Task extends Database
         return $results;
     }
 
-    // delete all row
     public function deleteRows()
     {
         $sql = "DELETE FROM {$this->tableName}";

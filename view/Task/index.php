@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="TuanRose">
+    <meta name="author" content="DoTienTrung">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BT2UDPT</title>
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -26,10 +25,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../Task/Task.php">Công việc <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../task/index.php">Công việc <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Category/Category.php">Loại công việc</a>
+                    <a class="nav-link" href="../category/index.php">Loại công việc</a>
                 </li>
             </ul>
         </div>
@@ -74,17 +73,11 @@
         </div>
 
         <?php
-        include_once 'taskstable.php';
+        include_once 'tasksTable.php';
         ?>
         <nav id="pagination"></nav>
         <input type="hidden" name="currentPage" id="currentPage" value="1">
     </div>
-    </div>
-    <!-- <div id="overlay" style="display:none;">
-        <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;"></div>
-        <br />
-        Loading...
-    </div> -->
 </body>
 
 </html>

@@ -1,16 +1,10 @@
 <?php
-require_once '../model/Database.php';
+require_once '../model/database.php';
 
 class Category extends Database
 {
-    // table name
     protected $tableName = 'category';
 
-    /**
-     * function is used to add record
-     * @param array $data
-     * @return int $lastInsertedId
-     */
     public function add($data)
     {
         if (!empty($data)) {
@@ -62,13 +56,6 @@ class Category extends Database
         }
     }
 
-    /**
-     * function is used to get records
-     * @param int $stmt
-     * @param int @limit
-     * @return array $results
-     */
-
     public function getRows($start = 0, $limit = 4)
     {
         $sql = "SELECT * FROM {$this->tableName} ORDER BY id DESC LIMIT {$start},{$limit}";
@@ -82,7 +69,6 @@ class Category extends Database
         return $results;
     }
 
-    // delete row using id
     public function deleteRow($id)
     {
         $sql = "DELETE FROM {$this->tableName}  WHERE id=:id";
@@ -106,12 +92,7 @@ class Category extends Database
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['pcount'];
     }
-    /**
-     * function is used to get single record based on the column value
-     * @param string $fileds
-     * @param any $value
-     * @return array $results
-     */
+
     public function getRow($field, $value)
     {
 
@@ -141,7 +122,6 @@ class Category extends Database
         return $results;
     }
 
-    // delete all row
     public function deleteRows()
     {
         $sql = "DELETE FROM {$this->tableName}";

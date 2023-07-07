@@ -1,5 +1,3 @@
-// task subfunction
-// get pagination
 function pagination(totalPages, currentPage) {
     var pageList = "";
     if (totalPages > 1) {
@@ -7,21 +5,22 @@ function pagination(totalPages, currentPage) {
         pageList += `<ul class="pagination justify-content-center">`;
         const prevClass = currentPage == 1 ? " disabled" : "";
         pageList += `<li class="page-item${prevClass}"><a class="page-link" href="#" data-page="${currentPage - 1
-            }">Previous</a></li>`;
+            }"> <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span></a></li>`;
         for (let p = 1; p <= totalPages; p++) {
             const activeClass = currentPage == p ? " active" : "";
             pageList += `<li class="page-item${activeClass}"><a class="page-link" href="#" data-page="${p}">${p}</a></li>`;
         }
         const nextClass = currentPage == totalPages ? " disabled" : "";
         pageList += `<li class="page-item${nextClass}"><a class="page-link" href="#" data-page="${currentPage + 1
-            }">Next</a></li>`;
+            }">  <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span></a></li>`;
         pageList += `</ul>`;
     }
 
     $("#pagination").html(pageList);
 }
 
-// get task row
 function getTaskRow(task, isChecked) {
     var taskRow = "";
     if (task) {
@@ -50,13 +49,11 @@ function getTaskRow(task, isChecked) {
     return taskRow;
 }
 
-
-// get tasks list
 function getTasks() {
     var pageNo = $("#currentPage").val();
     console.log(listTaskCheckedId);
     $.ajax({
-        url: "../../controller/TaskController.php",
+        url: "../../controller/taskController.php",
         type: "GET",
         dataType: "json",
         data: { page: pageNo, action: "getTasks" },
@@ -89,11 +86,9 @@ function getTasks() {
     });
 }
 
-
-// get tasks filter by status
 function getTasksByStatus(status) {
     $.ajax({
-        url: "../../controller/TaskController.php",
+        url: "../../controller/taskController.php",
         type: "GET",
         dataType: "json",
         data: { filterQuery: status, action: "filterTask" },
@@ -113,8 +108,6 @@ function getTasksByStatus(status) {
     });
 }
 
-// category subfunction
-// get pagination category
 function paginationCategory(totalPages, currentPage) {
     var pageList = "";
     if (totalPages > 1) {
@@ -136,7 +129,6 @@ function paginationCategory(totalPages, currentPage) {
     $("#paginationCategory").html(pageList);
 }
 
-// get category row
 function getCategoryRow(category, isChecked) {
     var categoryRow = "";
     if (category) {
@@ -160,12 +152,10 @@ function getCategoryRow(category, isChecked) {
     return categoryRow;
 }
 
-
-// get categories list
 function getCategories() {
     var pageNo = $("#currentPageCategory").val();
     $.ajax({
-        url: "../../controller/CategoryController.php",
+        url: "../../controller/categoryController.php",
         type: "GET",
         dataType: "json",
         data: { page: pageNo, action: "getCategories" },
@@ -195,13 +185,10 @@ let allTaskChecked = false;
 let listCategoryCheckedId = [];
 let allCategoryChecked = false;
 
-//EVENT HANDLE
 $(document).ready(function () {
-    // load page Task
-
-    if (document.location.pathname.match("/view/Task/Task.php")) {
+    if (document.location.pathname.match("/view/task/index.php")) {
         $.ajax({
-            url: "../../controller/CategoryController.php",
+            url: "../../controller/categoryController.php",
             type: "GET",
             dataType: "json",
             data: { page: 1, action: "getCategories" },
@@ -218,6 +205,7 @@ $(document).ready(function () {
                 console.log("error message: " + err + req);
             },
         });
+
         $(document).on("click", "#allTask", function (event) {
             const allTask = document.getElementById("allTask");
             allTaskChecked = allTask.checked;
@@ -231,6 +219,7 @@ $(document).ready(function () {
                     listTaskCheckedId.push(checkbox.value);
             });
         });
+
         $(document).on("click", ".checkboxTask", function (event) {
             if (event.target.checked) {
                 listTaskCheckedId.push(event.target.value);
@@ -238,7 +227,7 @@ $(document).ready(function () {
                 listTaskCheckedId = listTaskCheckedId.filter((item) => item !== event.target.value);
             }
         });
-        // add task
+
         $(document).on("submit", "#addTaskForm", function (event) {
             event.preventDefault();
             var formData = {
@@ -250,9 +239,9 @@ $(document).ready(function () {
                 action: "addTask",
             };
 
-            var alertMsg = "New task has been added successfully!";
+            var alertMsg = "Công việc đã được thêm thành công";
             $.ajax({
-                url: "../../controller/TaskController.php",
+                url: "../../controller/taskController.php",
                 type: "POST",
                 data: formData,
                 beforeSend: function () {
@@ -278,11 +267,9 @@ $(document).ready(function () {
             });
         });
 
-        // edit task
         $(document).on("submit", "#editTaskForm", function (event) {
             event.preventDefault();
             var pid = $(this).data("id");
-            // alert($("#task_edit_status").val());
             var formData = {
                 id: pid,
                 name: $("#editName").val(),
@@ -294,9 +281,9 @@ $(document).ready(function () {
                 action: "editTask",
             };
 
-            var alertMsg = "Task has been updated successfully!";
+            var alertMsg = "Công việc đã được cập nhật thành công";
             $.ajax({
-                url: "../../controller/TaskController.php",
+                url: "../../controller/taskController.php",
                 type: "POST",
                 data: formData,
                 beforeSend: function () {
@@ -322,7 +309,6 @@ $(document).ready(function () {
             });
         });
 
-        // pagination
         $(document).on("click", "ul.pagination li a", function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -333,12 +319,11 @@ $(document).ready(function () {
             $this.parent().addClass("active");
         });
 
-        //  get task
         $(document).on("click", "a.editTask", function () {
             var pid = $(this).data("id");
 
             $.ajax({
-                url: "../../controller/TaskController.php",
+                url: "../../controller/taskController.php",
                 type: "GET",
                 data: { id: pid, action: "getTask" },
                 beforeSend: function () {
@@ -347,7 +332,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response) {
                         const task = JSON.parse(response);
-                        $("#editTaskForm").data("id", task.id); // pass id to editTaskForm
+                        $("#editTaskForm").data("id", task.id);
                         $("#editName").val(task.name);
                         $("#editDescription").val(task.description);
                         $("#editCategoryId").val(task.category_id);
@@ -368,14 +353,13 @@ $(document).ready(function () {
             });
         });
 
-        // delete task
         $(document).on("click", "a.deleteTask", function (e) {
             e.preventDefault();
             var pid = $(this).data("id");
-            if (confirm("Are you sure want to delete this?")) {
-                var alertMsg = "Task has been deleted successfully!";
+            if (confirm("Bạn có chắc muốn xoá công việc này?")) {
+                var alertMsg = "Công việc đã được xóa thành công";
                 $.ajax({
-                    url: "../../controller/TaskController.php",
+                    url: "../../controller/taskController.php",
                     type: "GET",
                     dataType: "json",
                     data: { id: pid, action: "deleteTask" },
@@ -400,11 +384,10 @@ $(document).ready(function () {
             }
         });
 
-        // get detail task
         $(document).on("click", "a.detailTask", function () {
             var pid = $(this).data("id");
             $.ajax({
-                url: "../../controller/TaskController.php",
+                url: "../../controller/taskController.php",
                 type: "GET",
                 dataType: "json",
                 data: { id: pid, action: "getTask" },
@@ -444,12 +427,11 @@ $(document).ready(function () {
             });
         });
 
-        // search task
         $("#searchTaskInput").on("keyup", function () {
             const searchText = $(this).val();
             if (searchText.length > 1) {
                 $.ajax({
-                    url: "../../controller/TaskController.php",
+                    url: "../../controller/taskController.php",
                     type: "GET",
                     dataType: "json",
                     data: { searchQuery: searchText, action: "searchTask" },
@@ -473,7 +455,6 @@ $(document).ready(function () {
             }
         });
 
-        // filter
         $("#filterValueTODO").on("click", function () {
             getTasksByStatus("TODO");
         });
@@ -488,13 +469,12 @@ $(document).ready(function () {
             $("#pagination").show();
         });
 
-        //delete selected tasks
         $("#deleteSelectedTasksButton").on("click", function () {
             if (listTaskCheckedId.length === 0) {
                 alert("Chưa chọn công việc!!!");
             } else {
                 if (confirm("Bạn có chắc muốn xoá công việc này?")) {
-                    var alertMsg = "Tasks have been deleted successfully!";
+                    var alertMsg = "Công việc đã xóa thành công";
                     $.ajax({
                         url: "../../controller/TaskController.php",
                         type: "POST",
@@ -528,12 +508,10 @@ $(document).ready(function () {
             }
         });
 
-        // load tasks
         getTasks();
     }
 
-    // load page Category
-    if (document.location.pathname.match("/view/Category/Category.php")) {
+    if (document.location.pathname.match("/view/category/index.php")) {
         $(document).on("click", "#allCategory", function (event) {
             const allCategory = document.getElementById("allCategory");
             allCategoryChecked = allCategory.checked;
@@ -554,7 +532,7 @@ $(document).ready(function () {
                 listCategoryCheckedId = listCategoryCheckedId.filter((item) => item !== event.target.value);
             }
         });
-        // add category
+
         $(document).on("submit", "#addCategoryForm", function (event) {
             event.preventDefault();
             var formData = {
@@ -562,9 +540,9 @@ $(document).ready(function () {
                 action: "addCategory",
             };
 
-            var alertMsg = "New category has been added successfully!";
+            var alertMsg = "Thêm loại công việc thành công";
             $.ajax({
-                url: "../../controller/CategoryController.php",
+                url: "../../controller/categoryController.php",
                 type: "POST",
                 data: formData,
                 success: function (response) {
@@ -587,7 +565,6 @@ $(document).ready(function () {
             });
         });
 
-        // edit category
         $(document).on("submit", "#editCategoryForm", function (event) {
             event.preventDefault();
             var pid = $(this).data("id");
@@ -597,9 +574,9 @@ $(document).ready(function () {
                 action: "editCategory",
             };
 
-            var alertMsg = "Category has been updated successfully!";
+            var alertMsg = "Cập nhật loại công việc thành công";
             $.ajax({
-                url: "../../controller/CategoryController.php",
+                url: "../../controller/categoryController.php",
                 type: "POST",
                 data: formData,
                 success: function (response) {
@@ -621,7 +598,6 @@ $(document).ready(function () {
             });
         });
 
-        // pagination category
         $(document).on("click", "ul.pagination li a", function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -632,18 +608,17 @@ $(document).ready(function () {
             $this.parent().addClass("active");
         });
 
-        //  get category
         $(document).on("click", "a.editCategory", function () {
             var pid = $(this).data("id");
 
             $.ajax({
-                url: "../../controller/CategoryController.php",
+                url: "../../controller/categoryController.php",
                 type: "GET",
                 data: { id: pid, action: "getCategory" },
                 success: function (response) {
                     if (response) {
                         const category = JSON.parse(response);
-                        $("#editCategoryForm").data("id", category.id); // pass id to editCategoryForm
+                        $("#editCategoryForm").data("id", category.id);
                         $("#editName").val(category.name);
                     }
                 },
@@ -653,11 +628,10 @@ $(document).ready(function () {
             });
         });
 
-        // get detail category
         $(document).on("click", "a.detailCategory", function () {
             var pid = $(this).data("id");
             $.ajax({
-                url: "../../controller/CategoryController.php",
+                url: "../../controller/categoryController.php",
                 type: "GET",
                 dataType: "json",
                 data: { id: pid, action: "getCategory" },
@@ -680,14 +654,13 @@ $(document).ready(function () {
             });
         });
 
-        // delete category
         $(document).on("click", "a.deleteCategory", function (e) {
             e.preventDefault();
             var pid = $(this).data("id");
             if (confirm("Are you sure want to delete this?")) {
-                var alertMsg = "Category has been deleted successfully!";
+                var alertMsg = "Loại công việc đã xóa thành công";
                 $.ajax({
-                    url: "../../controller/CategoryController.php",
+                    url: "../../controller/categoryController.php",
                     type: "GET",
                     dataType: "json",
                     data: { id: pid, action: "deleteCategory" },
@@ -708,12 +681,11 @@ $(document).ready(function () {
             }
         });
 
-        // search categories
         $("#searchCategoryInput").on("keyup", function () {
             const searchText = $(this).val();
             if (searchText.length > 1) {
                 $.ajax({
-                    url: "../../controller/CategoryController.php",
+                    url: "../../controller/categoryController.php",
                     type: "GET",
                     dataType: "json",
                     data: {
@@ -740,13 +712,12 @@ $(document).ready(function () {
             }
         });
 
-        //delete selected categories
         $("#deleteSelectedCategoriesButton").on("click", function () {
             if (listCategoryCheckedId.length === 0) {
                 alert("Chưa chọn loại công việc!!!");
             } else {
                 if (confirm("Bạn có chắc muốn xoá loại công việc này?")) {
-                    var alertMsg = "Categories have been deleted successfully!";
+                    var alertMsg = "Loại công việc đã xóa thành công";
                     $.ajax({
                         url: "../../controller/CategoryController.php",
                         type: "POST",
@@ -778,7 +749,6 @@ $(document).ready(function () {
             }
         });
 
-        // load categories
         getCategories();
     }
 });

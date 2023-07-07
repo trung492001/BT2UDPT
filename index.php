@@ -1,3 +1,3 @@
 <?php
 
-header('Location: view/Task/Task.php');
+header('Location: view/task/index.php');

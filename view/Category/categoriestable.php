@@ -1,4 +1,3 @@
-<!-- table -->
 <table class="table" id="categoriesTable">
     <thead>
         <tr>
@@ -14,4 +13,3 @@
 
     </tbody>
 </table>
-<!-- table -->
