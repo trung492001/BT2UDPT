@@ -19,12 +19,12 @@ class TaskController
 
         $tasks = $this->model->getRows($start, $limit);
         if (!empty($tasks)) {
-            $taskslist = $tasks;
+            $tasksList = $tasks;
         } else {
-            $taskslist = [];
+            $tasksList = [];
         }
         $total = $this->model->getCount();
-        $taskArr = ['count' => $total, 'tasks' => $taskslist];
+        $taskArr = ['count' => $total, 'tasks' => $tasksList];
         echo json_encode($taskArr);
         exit();
     }

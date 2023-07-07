@@ -19,12 +19,12 @@ class CategoryController
 
         $categories = $this->model->getRows($start, $limit);
         if (!empty($categories)) {
-            $categorieslist = $categories;
+            $categoriesList = $categories;
         } else {
-            $categorieslist = [];
+            $categoriesList = [];
         }
         $total = $this->model->getCount();
-        $categoryArr = ['count' => $total, 'categories' => $categorieslist];
+        $categoryArr = ['count' => $total, 'categories' => $categoriesList];
         echo json_encode($categoryArr);
         exit();
     }
